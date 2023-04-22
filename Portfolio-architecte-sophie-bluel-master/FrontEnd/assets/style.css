@@ -109,6 +109,7 @@ section {
 
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
 
 ol,
@@ -185,6 +186,11 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+}
+
+nav ul li a {
+	color: black;
+	text-decoration: none;
 }
 
 li:hover {
@@ -292,6 +298,10 @@ footer nav ul {
 
 
 /* formulaire de connexion  */
+.logIn {
+	font-weight: bolder;
+	color: black;
+}
 
 #connexion {
 	width: 100%;
@@ -339,6 +349,7 @@ footer nav ul {
 	padding: 10px;
 	text-align: center;
 	border-radius: 60px;
+	border: none;
 }
 
 #connexion a {
