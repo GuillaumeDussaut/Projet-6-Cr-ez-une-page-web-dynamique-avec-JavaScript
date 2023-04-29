@@ -6,15 +6,15 @@ fetch("http://localhost:5678/api/works")
         for (let i = 0; i < data.length; i++){
             const addElt = document.createElement("figure");
             const addImg = document.createElement("img");
-            const addFig = document.createElement("figcaption");
+            const addFigc = document.createElement("figcaption");
             
             addImg.src = data[i].imageUrl;
             addImg.alt = data[i].title;
-            addFig.innerHTML = data[i].title;
+            addFigc.innerHTML = data[i].title;
 
             galerie.appendChild(addElt);
             addElt.appendChild(addImg);
-            addElt.appendChild(addFig);
+            addElt.appendChild(addFigc);
         }
         
     });
@@ -58,7 +58,7 @@ fetch("http://localhost:5678/api/works")
     }
     btnAppart.addEventListener('click', appart);
 
-    // hotel restaurants 
+    // hotels restaurants 
 
     const btnHotel = document.querySelector('.hotelResto');
     function hotel() {  
