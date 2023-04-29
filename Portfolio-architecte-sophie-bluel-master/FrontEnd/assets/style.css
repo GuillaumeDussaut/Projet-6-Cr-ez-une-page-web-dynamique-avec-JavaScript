@@ -388,3 +388,11 @@ footer nav ul {
 	text-align: center;
 	color: black;
 }
+
+.block {
+	display: block;
+}
+
+.none {
+	display: none;
+}
