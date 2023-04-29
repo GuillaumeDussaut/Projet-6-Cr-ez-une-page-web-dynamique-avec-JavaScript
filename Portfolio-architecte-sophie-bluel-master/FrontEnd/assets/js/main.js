@@ -1,27 +1,4 @@
 
-
-// let imgElt = document.createElement("img")
-// imgElt.src = "http://localhost:5678/images/abajour-tahina1651286843956.png"
-// imgElt.alt = "Abajour Tahina"
-// // imgElt.width = "100"
-
-// const introContainer = document.getElementById("introduction")
-// introContainer.appendChild(imgElt)
-
-// console.log(imgElt)
-
-// fetch("http://localhost:5678/api/works")
-// .then( data => data.json() )
-// .then(data => {
-//     console.log(data)
-// })
-// .catch(error => console.log("erreur"))
-
-
-
-// const figureElt = document.createElement("figure");
-// const imgElt = document.createElement("img");
-// const figcaptElt = document.createElement("figcaption");
 const galerie = document.getElementById("IDgallery")
 fetch("http://localhost:5678/api/works")
     .then( data => data.json() )
@@ -33,6 +10,9 @@ fetch("http://localhost:5678/api/works")
             const addFig = document.createElement("figcaption");
             
             addImg.src = data[i].imageUrl;
+            addImg.alt = data[i].title;
+            addFig.innerHTML = data[i].title;
+            addElt.classList.add(data[i].category.id);
 
             galerie.appendChild(addElt);
             addElt.appendChild(addImg);
@@ -40,5 +20,6 @@ fetch("http://localhost:5678/api/works")
         }
         
     });
+
 
 
