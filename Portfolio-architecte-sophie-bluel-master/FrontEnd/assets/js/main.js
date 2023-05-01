@@ -7,15 +7,13 @@ fetch("http://localhost:5678/api/works")
             const addElt = document.createElement("figure");
             const addImg = document.createElement("img");
             const addFigc = document.createElement("figcaption");
-            const idImg = data[i].category.name;
-
+            const idImg = data[i].category.id;
 
             addImg.src = data[i].imageUrl;
             addImg.alt = data[i].title;
             addFigc.innerHTML = data[i].title;
-            addElt.setAttribute('id',idImg);
+            addElt.setAttribute('id','figure'+idImg);
             
-
             galerie.appendChild(addElt);
             addElt.appendChild(addImg);
             addElt.appendChild(addFigc);
@@ -23,20 +21,20 @@ fetch("http://localhost:5678/api/works")
     });
 
     // partie btns
-
-    
+  
 fetch("http://localhost:5678/api/works")
     .then(data => data.json())
     .then(data => {
 
 // Tous
       const btnTous = document.querySelector('.Tous');
+
       function Tous() {
         const figures = document.querySelectorAll('.gallery figure');
         figures.forEach(figure => figure.classList.remove('none'));
-        figures.forEach(figure => figure.classList.add('block'));
-        console.log(data);
+        figures.forEach(figure => figure.classList.add('block'));    
       }
+
       btnTous.addEventListener('click', Tous);
 
  // Objets
@@ -46,14 +44,12 @@ fetch("http://localhost:5678/api/works")
       function Objets() { 
         const figures = document.querySelectorAll('.gallery figure');
         figures.forEach(figure => figure.classList.add('none'));
-
-        
-        const idObjet = document.querySelectorAll('#Objets');
+      
+        const idObjet = document.querySelectorAll('#figure1');
         idObjet.forEach(idObjet => idObjet.classList.remove('none'));
         idObjet.forEach(idObjet => idObjet.classList.add('block'));
-        console.log(idObjet);
-
       }
+
       btnObj.addEventListener('click', Objets);
 
     //   appartements
@@ -63,13 +59,12 @@ fetch("http://localhost:5678/api/works")
     function appart() {
         const figures = document.querySelectorAll('.gallery figure');
         figures.forEach(figure => figure.classList.add('none'));
-
-        
-        const idObjet = document.querySelectorAll('#Appartements');
+     
+        const idObjet = document.querySelectorAll('#figure2');
         idObjet.forEach(idObjet => idObjet.classList.remove('none'));
-        idObjet.forEach(idObjet => idObjet.classList.add('block'));
-        console.log(idObjet);
+        idObjet.forEach(idObjet => idObjet.classList.add('block'));  
     }
+
     btnAppart.addEventListener('click', appart);
 
     // hotels restaurants 
@@ -79,14 +74,14 @@ fetch("http://localhost:5678/api/works")
         const figures = document.querySelectorAll('.gallery figure');
         figures.forEach(figure => figure.classList.add('none'));
 
-        
-        const idObjet = document.querySelectorAll('#Hotels & restaurants');
+        const idObjet = document.querySelectorAll('#figure3');
         idObjet.forEach(idObjet => idObjet.classList.remove('none'));
-        idObjet.forEach(idObjet => idObjet.classList.add('block'));
-        console.log(idObjet);
+        idObjet.forEach(idObjet => idObjet.classList.add('block'));  
+        console.log(idObjet); 
+        console.log(data); 
     }
-    btnHotel.addEventListener('click', hotel);
-    
+
+    btnHotel.addEventListener('click', hotel); 
 });
    
 
