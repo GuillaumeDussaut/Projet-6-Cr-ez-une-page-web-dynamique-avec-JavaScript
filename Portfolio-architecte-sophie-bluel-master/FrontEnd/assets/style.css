@@ -189,6 +189,7 @@ nav li {
 }
 
 nav li img {
+	cursor: pointer;
 	width: 20px;
 	height: 20px;
 }
@@ -252,6 +253,8 @@ li a:hover {
 	font-size: 16px;
 	font-weight: bold;
 }
+
+
 
 .actif {
 	color: white;
@@ -319,6 +322,7 @@ li a:hover {
 }
 
 input[type="submit"] {
+	cursor: pointer;
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -327,6 +331,24 @@ input[type="submit"] {
 	width: 180px;
 	text-align: center;
 	border-radius: 60px;
+}
+
+button[type="button"] {
+	cursor: pointer;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 180px;
+	padding: 10px;
+	border: none;
+	text-align: center;
+	border-radius: 60px;
+}
+
+button[type="button"]:hover {
+	transform: scale(1.10);
 }
 
 footer nav ul {

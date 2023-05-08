@@ -1,120 +1,103 @@
+async function getWorks(){
+    try {
+        const response = await fetch("http://localhost:5678/api/works")
+        if(!response.ok){
+            throw new Error('500')
+        }
+        const data = await response.json()
+        // console.log(data)
+        return data
+    } catch (error) {
+        console.error("Erreur : ", error)
+    }
+}
 
-const galerie = document.getElementById("IDgallery")
-fetch("http://localhost:5678/api/works")
-    .then( data => data.json() )
-    .then(data => {       
-        for (let i = 0; i < data.length; i++){
-            const addElt = document.createElement("figure");
-            const addImg = document.createElement("img");
-            const addFigc = document.createElement("figcaption");
-            const idImg = data[i].category.id;
+async function getCategories(){
+    try {
+        const response = await fetch("http://localhost:5678/api/categories")
+        if(!response.ok){
+            throw new Error('500')
+        }
+        const data = await response.json()
+        // console.log(data)
+        return data
+    } catch (error) {
+        console.error("Erreur : ", error)
+    }
+}
 
-            addImg.src = data[i].imageUrl;
-            addImg.alt = data[i].title;
-            addFigc.innerHTML = data[i].title;
-            addElt.setAttribute('id','figure'+idImg);
-            
-            galerie.appendChild(addElt);
-            addElt.appendChild(addImg);
-            addElt.appendChild(addFigc);
-        }    
-    });
-    
-// partie btns
-  
-fetch("http://localhost:5678/api/works")
-    .then(data => data.json())
-    .then(data => {
+async function home(){
+    const works = await getWorks()
+    const categories = await getCategories()
 
-// Tous
-      const btnTous = document.querySelector('.tous');
+    createWorksItem(works)
 
-      function Tous() {
-        const figures = document.querySelectorAll('.gallery figure');
-        figures.forEach(figure => figure.classList.remove('none'));
-        figures.forEach(figure => figure.classList.add('block')); 
+    btnsCategories(categories, works)
+    console.log(categories);
+}
 
+home();
 
-// btn color / reset
-        const btns = document.querySelectorAll('#categ button');
-        btns.forEach(btns => btns.classList.remove('actif'));
-        btns.forEach(btns => btns.classList.add('inactif'));
-// coloration
-        btnTous.classList.remove('inactif');
-        btnTous.classList.add('actif');
-      }
+//  création des boutons et ajout de leurs noms
 
-      btnTous.addEventListener('click', Tous);
+function btnsCategories(data, works){
+    const btnsContainer = document.getElementById("categ");
 
-// Objets
-
-      const btnObj = document.querySelector('.objets');
-
-      function Objets() { 
-        const figures = document.querySelectorAll('.gallery figure');
-        figures.forEach(figure => figure.classList.add('none'));
-      
-        const idObjet = document.querySelectorAll('#figure1');
-        idObjet.forEach(idObjet => idObjet.classList.remove('none'));
-        idObjet.forEach(idObjet => idObjet.classList.add('block'));
-
-// btn color / reset
-        const btns = document.querySelectorAll('#categ button');
-        btns.forEach(btns => btns.classList.remove('actif'));
-        btns.forEach(btns => btns.classList.add('inactif'));
-// coloration
-        btnObj.classList.remove('inactif');
-        btnObj.classList.add('actif');
-      }
-
-      btnObj.addEventListener('click', Objets);
-
-//   appartements
-
-    const btnAppart = document.querySelector('.appartements');
-
-    function appart() {
-        const figures = document.querySelectorAll('.gallery figure');
-        figures.forEach(figure => figure.classList.add('none'));
-     
-        const idObjet = document.querySelectorAll('#figure2');
-        idObjet.forEach(idObjet => idObjet.classList.remove('none'));
-        idObjet.forEach(idObjet => idObjet.classList.add('block'));
+    for (let i = 0; i < data.length; i++){
+        const addBtn = document.createElement("BUTTON");
+        addBtn.innerHTML = data[i].name;      
+        addBtn.classList.add("inactif");
         
-// btn color / reset
-        const btns = document.querySelectorAll('#categ button');
-        btns.forEach(btns => btns.classList.remove('actif'));
-        btns.forEach(btns => btns.classList.add('inactif'));
-// coloration
-        btnAppart.classList.remove('inactif');
-        btnAppart.classList.add('actif');
+        // filtre catégories avec fonction au click
+        
+        addBtn.addEventListener('click', function(){
+            const categorieId = data[i].id;
+            const filteredWorks = works.filter(work => work.category.id === categorieId);
+            createWorksItem(filteredWorks);
+            setActiveButton(this);
+        });
+
+        const btnT = document.getElementById("btnT");
+        btnT.addEventListener('click', function(){
+            createWorksItem(works);
+            setActiveButton(this);
+        });
+
+        btnsContainer.appendChild(addBtn);
     }
+}
 
-    btnAppart.addEventListener('click', appart);
+// changement de classe pour les boutons 
 
-// hotels restaurants 
+function setActiveButton(button) {
+    const buttons = document.querySelectorAll("#categ button");
+    buttons.forEach(btn => {
+        btn.classList.remove("actif");
+        btn.classList.add("inactif");
+    });
 
-    const btnHotel = document.querySelector('.hotelResto');
-    function hotel() {  
-        const figures = document.querySelectorAll('.gallery figure');
-        figures.forEach(figure => figure.classList.add('none'));
+    button.classList.remove("inactif");
+    button.classList.add("actif");
+}
 
-        const idObjet = document.querySelectorAll('#figure3');
-        idObjet.forEach(idObjet => idObjet.classList.remove('none'));
-        idObjet.forEach(idObjet => idObjet.classList.add('block'));  
+//  partie pour afficher les images
 
-// btn color / reset
-        const btns = document.querySelectorAll('#categ button');
-        btns.forEach(btns => btns.classList.remove('actif'));
-        btns.forEach(btns => btns.classList.add('inactif'));
-// coloration
-        btnHotel.classList.remove('inactif');
-        btnHotel.classList.add('actif');
-    }
+function createWorksItem(data){
+    const galerie = document.getElementById("IDgallery")
+    galerie.innerHTML = "";
+    for (let i = 0; i < data.length; i++){
+        const addElt = document.createElement("figure");
+        const addImg = document.createElement("img");
+        const addFigc = document.createElement("figcaption");
+        const idImg = data[i].category.id;
 
-    btnHotel.addEventListener('click', hotel); 
-});
-
-   
-
-
+        addImg.src = data[i].imageUrl;
+        addImg.alt = data[i].title;
+        addFigc.innerHTML = data[i].title;
+        
+        
+        galerie.appendChild(addElt);
+        addElt.appendChild(addImg);
+        addElt.appendChild(addFigc);
+    }    
+}
