@@ -481,10 +481,7 @@ footer nav ul {
 	margin-left:20px;
 }
 
-.profil{
-	margin-left:55px;
-	margin-top:20px;
-}
+
 
 /* fenetre modale */
 .modal-container{
@@ -512,6 +509,10 @@ footer nav ul {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+.modale H3{
+	font-size: 26px;
+	font-weight: bolder;
 }
 #miniaturesContainer{
 	width: 70%;
