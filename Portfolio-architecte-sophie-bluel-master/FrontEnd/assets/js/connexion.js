@@ -32,7 +32,7 @@ const form = {
           const messageErreur = document.getElementById('msgError');
           messageErreur.innerHTML = "Identifiant ou mot de passe incorrect";
           messageErreur.style.color="red";
-          
+  
         }
       })
       .catch((err) => {
