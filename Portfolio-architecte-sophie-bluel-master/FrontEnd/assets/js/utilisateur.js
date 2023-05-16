@@ -18,3 +18,19 @@ if (token) {
     div.classList.remove('modifier');
   });
 }
+
+// modale principale
+
+const modifGalerie = document.getElementById("modifGalerie");
+const modale = document.getElementById("contMiniat");
+const close = document.getElementById("close");
+
+// Vérifiez la valeur de token avant d'ajouter l'écouteur d'événements
+if (token) {
+  modifGalerie.addEventListener('click', function() {
+    modale.style.display = "flex";
+  });
+  close.addEventListener('click', function(){
+    modale.style.display = "none";
+  })
+}
