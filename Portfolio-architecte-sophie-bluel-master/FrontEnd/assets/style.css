@@ -144,13 +144,14 @@ body {
 }
 
 header {
+	margin:0;
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 section {
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 h1 {
@@ -424,6 +425,10 @@ footer nav ul {
 }
 
 /* bandeau top connecté */
+.reset-margins {
+	margin: 0;
+	padding: 0;
+  }
 .bandeauConnecte{
 	width: 100%;
 	padding: 5px;
@@ -444,15 +449,10 @@ footer nav ul {
 }
 .bandeauConnecte i{
 	color:white;
-	width: 20px;
-	height: 20px;
+	font-size:16px;
 	display:block;
 }
-.icon{
-	color: black;
-	width: 50px;
-	height: 50px;
-}
+
 .changement{
 	cursor:pointer;
 	padding:10px;
@@ -471,18 +471,20 @@ footer nav ul {
 	align-items: center;
 	padding:20px;
 }
-i {
-	padding:5px;
-}
-.modifLien{
+
+.modifier{
 	width: 80px;
 	display:flex;
 	justify-content: center;
 	align-items: center;
 	margin-left:20px;
 }
-#modifier{
+.modifier a{
 	display:block;
 	text-decoration: none;
 	color: black;
+}
+.profil{
+	margin-left:55px;
+	margin-top:20px;
 }

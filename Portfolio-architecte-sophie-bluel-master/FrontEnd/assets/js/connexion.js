@@ -25,11 +25,13 @@ const form = {
         // vérification si infos correctes, enregistrement du token + redirection
         if (data.token) {
           localStorage.setItem("token", data.token);
-          // Redirige vers la page d'accueil
+        // Redirige vers la page d'accueil
           document.location.href = 'index.html'; // Redirige vers la page d'accueil
         } else {
-            // Gérer l'affichage d'un message d'erreur approprié à l'utilisateur
-          console.log("Identifiants incorrects");
+        // Gérer l'affichage d'un message d'erreur à l'utilisateur
+          const messageErreur = document.getElementById('msgError');
+          messageErreur.innerHTML = "Identifiant ou mot de passe incorrect";
+          messageErreur.style.color="red";
           
         }
       })

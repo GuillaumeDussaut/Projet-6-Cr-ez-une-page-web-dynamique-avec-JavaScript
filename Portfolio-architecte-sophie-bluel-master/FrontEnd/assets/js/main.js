@@ -59,28 +59,11 @@ function btnsCategories(categories, works){
         btnsContainer.appendChild(addBtn);
     }
 
-    // for (let i = 0; i < categories.length; i++){
-    //     const addBtn = document.createElement("BUTTON");
-    //     addBtn.innerHTML = categories[i].name;      
-    //     addBtn.classList.add("inactif");
-        
-    //     // filtre catégories avec fonction au click
-        
-    //     addBtn.addEventListener('click', function(){
-    //         const categorieId = categories[i].id;
-    //         const filteredWorks = works.filter(work => work.category.id === categorieId);
-    //         createWorksItem(filteredWorks);
-    //         setActiveButton(this);
-    //     });
-
         const btnT = document.getElementById("btnT");
         btnT.addEventListener('click', function(){
             createWorksItem(works);
             setActiveButton(this);
         });
-
-        // btnsContainer.appendChild(addBtn);
-    // }
 }
 
 // changement de classe pour les boutons 
@@ -115,20 +98,5 @@ function createWorksItem(works){
         galerie.appendChild(addElt);
         addElt.appendChild(addImg);
         addElt.appendChild(addFigc);
-    }
-    // for (let i = 0; i < data.length; i++){
-    //     const addElt = document.createElement("figure");
-    //     const addImg = document.createElement("img");
-    //     const addFigc = document.createElement("figcaption");
-    //     const idImg = data[i].category.id;
-
-    //     addImg.src = data[i].imageUrl;
-    //     addImg.alt = data[i].title;
-    //     addFigc.innerHTML = data[i].title;
-        
-        
-    //     galerie.appendChild(addElt);
-    //     addElt.appendChild(addImg);
-    //     addElt.appendChild(addFigc);
-    // }    
+    }   
 }
