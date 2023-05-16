@@ -12,8 +12,17 @@
     />
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
+    <script src="https://kit.fontawesome.com/a4e4faa4f9.js" crossorigin="anonymous"></script>
   </head>
   <body>
+    <!-- bandeau connecté -->
+    <div class="bandeauConnecte" id="bandeau">
+      <i class="fas fa-home"></i>
+        <p>Mode édition</p>
+   
+      <button class="changement" id="IDchange">publier les changements</button>
+    </div>
+    <!-- fin bandeau -->
     <header>
       <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
       <nav>
@@ -29,7 +38,14 @@
       <section id="introduction">
         <figure>
           <img src="./assets/images/sophie-bluel.png" alt="Sophie Bluel" />
+          <!-- modifier photo profil -->
+          <div class="modifLien">          
+            <i class="far fa-edit"></i>
+            <a href="#" id="modifier">modifier</a>
+          </div>
+          <!-- fin -->
         </figure>
+
         <article>
           <h2>Designer d'espace</h2>
           <p>
@@ -50,7 +66,11 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <div class="projets">
+          <h2>Mes Projets</h2>  
+          <i class="far fa-edit"></i>
+          <p>modifier</p> 
+        </div>
         <!-- catégories  -->
         <div class="categories" id="categ">
           <button class="actif" id="btnT">Tous</button>
@@ -85,5 +105,9 @@
 
     <!-- scripts  -->
     <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/utilisateur.js"></script>
+    
+    <!-- fin scripts -->
+
   </body>
 </html>

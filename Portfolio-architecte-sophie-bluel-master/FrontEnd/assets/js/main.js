@@ -40,22 +40,38 @@ home();
 
 //  création des boutons et ajout de leurs noms
 
-function btnsCategories(data, works){
+function btnsCategories(categories, works){
     const btnsContainer = document.getElementById("categ");
 
-    for (let i = 0; i < data.length; i++){
+    for (const categorie of categories) {
         const addBtn = document.createElement("BUTTON");
-        addBtn.innerHTML = data[i].name;      
+        addBtn.innerHTML = categorie.name;      
         addBtn.classList.add("inactif");
         
         // filtre catégories avec fonction au click
-        
         addBtn.addEventListener('click', function(){
-            const categorieId = data[i].id;
+            const categorieId = categorie.id;
             const filteredWorks = works.filter(work => work.category.id === categorieId);
             createWorksItem(filteredWorks);
             setActiveButton(this);
         });
+
+        btnsContainer.appendChild(addBtn);
+    }
+
+    // for (let i = 0; i < categories.length; i++){
+    //     const addBtn = document.createElement("BUTTON");
+    //     addBtn.innerHTML = categories[i].name;      
+    //     addBtn.classList.add("inactif");
+        
+    //     // filtre catégories avec fonction au click
+        
+    //     addBtn.addEventListener('click', function(){
+    //         const categorieId = categories[i].id;
+    //         const filteredWorks = works.filter(work => work.category.id === categorieId);
+    //         createWorksItem(filteredWorks);
+    //         setActiveButton(this);
+    //     });
 
         const btnT = document.getElementById("btnT");
         btnT.addEventListener('click', function(){
@@ -63,8 +79,8 @@ function btnsCategories(data, works){
             setActiveButton(this);
         });
 
-        btnsContainer.appendChild(addBtn);
-    }
+        // btnsContainer.appendChild(addBtn);
+    // }
 }
 
 // changement de classe pour les boutons 
@@ -82,22 +98,37 @@ function setActiveButton(button) {
 
 //  partie pour afficher les images
 
-function createWorksItem(data){
+function createWorksItem(works){
     const galerie = document.getElementById("IDgallery")
     galerie.innerHTML = "";
-    for (let i = 0; i < data.length; i++){
+    for (const work of works) {
         const addElt = document.createElement("figure");
         const addImg = document.createElement("img");
         const addFigc = document.createElement("figcaption");
-        const idImg = data[i].category.id;
+        const idImg = work.category.id;
 
-        addImg.src = data[i].imageUrl;
-        addImg.alt = data[i].title;
-        addFigc.innerHTML = data[i].title;
+        addImg.src = work.imageUrl;
+        addImg.alt = work.title;
+        addFigc.innerHTML = work.title;
         
         
         galerie.appendChild(addElt);
         addElt.appendChild(addImg);
         addElt.appendChild(addFigc);
-    }    
+    }
+    // for (let i = 0; i < data.length; i++){
+    //     const addElt = document.createElement("figure");
+    //     const addImg = document.createElement("img");
+    //     const addFigc = document.createElement("figcaption");
+    //     const idImg = data[i].category.id;
+
+    //     addImg.src = data[i].imageUrl;
+    //     addImg.alt = data[i].title;
+    //     addFigc.innerHTML = data[i].title;
+        
+        
+    //     galerie.appendChild(addElt);
+    //     addElt.appendChild(addImg);
+    //     addElt.appendChild(addFigc);
+    // }    
 }
