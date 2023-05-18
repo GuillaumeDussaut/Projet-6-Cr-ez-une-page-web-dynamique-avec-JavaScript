@@ -30,7 +30,9 @@ if (token) {
   modifGalerie.addEventListener('click', function() {
     modale.style.display = "flex";
   });
-  close.addEventListener('click', function(){
-    modale.style.display = "none";
-  })
+
 }
+close.addEventListener('click', function(){
+  modale.style.display = "none";
+});
+

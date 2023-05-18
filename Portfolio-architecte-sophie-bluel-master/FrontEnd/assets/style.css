@@ -480,6 +480,18 @@ footer nav ul {
 	align-items: center;
 	margin-left:20px;
 }
+.modifierProfil{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+.modifier i{
+	margin-right:5px;
+}
+#modifProfil{
+	margin-left:50px;
+	margin-top:10px;
+}
 
 
 
@@ -487,7 +499,7 @@ footer nav ul {
 .modal-container{
 	position:absolute;
 	width: 100%;
-	height: 3500px;
+	height: 3550px;
 	top:0;
 	bottom:0;
 	left:0;
@@ -497,6 +509,7 @@ footer nav ul {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	overflow:hidden;
 }
 .modale{
 	position:absolute;
@@ -544,3 +557,7 @@ footer nav ul {
 	background:white;
 	font-size:20px;
 }
+/* fenetre d'ajout de photo */
+
+
+
