@@ -474,16 +474,9 @@ footer nav ul {
 
 .modifier{
 	cursor:pointer;
-	width: 80px;
 	display:flex;
-	justify-content: center;
 	align-items: center;
 	margin-left:20px;
-}
-.modifierProfil{
-	display:flex;
-	justify-content: center;
-	align-items: center;
 }
 .modifier i{
 	margin-right:5px;
@@ -509,7 +502,6 @@ footer nav ul {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	overflow:hidden;
 }
 .modale{
 	position:absolute;
@@ -518,12 +510,17 @@ footer nav ul {
 	background: white;
 	width:630px ;
 	height: 731px;
+}
+/* modale galerie */
+.modaleGalerie{
 	display:flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
+	height: 100%;
 }
-.modale H3{
+.modaleGalerie H3{
 	font-size: 26px;
 	font-weight: bolder;
 }
@@ -558,6 +555,70 @@ footer nav ul {
 	font-size:20px;
 }
 /* fenetre d'ajout de photo */
+.ajoutPhoto{
+	width: 100%;
+	height: 100%;
+	display:none;
+	flex-direction: column;
+	align-items: center;
+}
+.ajoutPhoto h3{
+	text-align:center;
+	font-size:26px;
+	padding:25px;
+}
+.btnsIcon{
+	width: 95%;
+	padding:20px;
+	display:flex;
+	justify-content: space-between;
+}
+.btnsIcon button{
+	cursor:pointer;
+	border:none;
+	background:transparent;
+	font-size:22px;
+}
+.photoContainer{
+	width: 420px;
+	height: 169px;;
+	border-radius:4px;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background:#E8F1F6;
+}
+.ajoutPhoto form{
+	width: 70%;
+	height: auto;
+	padding:20px;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.ajoutPhoto form label{
+	padding:10px;
+}
+.ajoutPhoto form input, select{
+	border:none;
+	box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.171);;
+	height: 51px;
+	width: 420px;
+}
+#valider{
+	cursor:pointer;
+	padding:10px;
+	width:237px ;
+	border-radius:20px;
+	background: #A7A7A7;
+	color: white;
+	border:none;
+	margin-top:40px;
+}
+#valider:hover{
+	transform:scale(1.05);
+}
 
 
 

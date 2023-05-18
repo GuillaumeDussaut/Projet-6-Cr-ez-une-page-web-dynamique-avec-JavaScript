@@ -23,16 +23,29 @@ if (token) {
 
 const modifGalerie = document.getElementById("modifGalerie");
 const modale = document.getElementById("contMiniat");
-const close = document.getElementById("close");
+const closeButtons = document.querySelectorAll("#close, #close2");
+const btnPrevious = document.getElementById('previous');
+const modaleAjoutPhoto = document.getElementsByClassName('ajoutPhoto')[0];
+const modalePrincipale = document.getElementsByClassName('modaleGalerie')[0];
+const btnAjout = document.getElementById('btnAjout');
 
-// Vérifiez la valeur de token avant d'ajouter l'écouteur d'événements
-if (token) {
-  modifGalerie.addEventListener('click', function() {
-    modale.style.display = "flex";
+modifGalerie.addEventListener('click', function() {
+  modale.style.display = "flex";
+});
+
+closeButtons.forEach(function(button) {
+  button.addEventListener('click', function(){
+    modale.style.display = "none";
   });
+});
 
-}
-close.addEventListener('click', function(){
-  modale.style.display = "none";
+btnPrevious.addEventListener('click', function(){
+  modaleAjoutPhoto.style.display ='none';
+  modalePrincipale.style.display='flex';
+});
+
+btnAjout.addEventListener('click', function(){
+  modaleAjoutPhoto.style.display ='flex';
+  modalePrincipale.style.display='none';
 });
 
