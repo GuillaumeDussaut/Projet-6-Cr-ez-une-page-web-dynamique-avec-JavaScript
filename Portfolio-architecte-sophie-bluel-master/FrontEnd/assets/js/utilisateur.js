@@ -38,7 +38,7 @@ closeButtons.forEach(function(button) {
   button.addEventListener('click', function(){
     modale.style.display = "none";
     modalePrincipale.style.display ='flex';
-    modaleAjoutPhoto.style.display = "none";
+    modaleAjoutPhoto.style.display = "none";    
   });
 });
 
