@@ -535,6 +535,32 @@ footer nav ul {
 	justify-content:flex-start;
 	align-items: center;
 }
+#miniaturesContainer img{
+	width: 78px;
+	height: 104px;
+}
+
+#miniaturesContainer figure{
+	position:relative;
+	width: 78px;
+	height: 104px;
+	margin:5px;
+}
+#miniaturesContainer figure i{
+	cursor:pointer;
+	font-size:10px;
+	position:absolute;
+	width: 17px;
+	height: 17px;
+	right:5px;
+	top:5px;
+	color:white;
+	background:black;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .suppr{
 	display:block;
 	color:red;
@@ -547,78 +573,132 @@ footer nav ul {
 }
 .fermer{
 	cursor:pointer;
-	position:relative;
-	bottom:270px;
-	left:280px;
+	position:absolute;
+	top:0px;
+	right:0px;
+	padding:20px;
 	border:none;
-	background:white;
+	background:transparent;
+	font-size:20px;
+}
+.fermer2{
+	cursor:pointer;
+	position:absolute;
+	top:0px;
+	right:0px;
+	padding:20px;
+	border:none;
+	background:transparent;
+	font-size:20px;
+}
+.previous{
+	cursor:pointer;
+	position:absolute;
+	top:0px;
+	left:0px;
+	padding:20px;
+	border:none;
+	background:transparent;
 	font-size:20px;
 }
 /* fenetre d'ajout de photo */
+#formulaireAjoutPhoto{
+	width: 100%;
+	height: auto;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 .ajoutPhoto{
 	width: 100%;
 	height: 100%;
-	display:none;
+	display:flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 }
 .ajoutPhoto h3{
-	text-align:center;
-	font-size:26px;
-	padding:25px;
+	font-size: 26px;
+	margin-bottom:20px;
 }
-.btnsIcon{
-	width: 95%;
-	padding:20px;
-	display:flex;
-	justify-content: space-between;
-}
-.btnsIcon button{
-	cursor:pointer;
-	border:none;
-	background:transparent;
-	font-size:22px;
-}
-.photoContainer{
+.cadrePhoto{
 	width: 420px;
-	height: 169px;;
-	border-radius:4px;
+	height: 169px;
 	display:flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	background:#E8F1F6;
 }
-.ajoutPhoto form{
-	width: 70%;
-	height: auto;
-	padding:20px;
-	display:flex;
-	flex-direction: column;
+.cadrePhoto i{
+	font-size:60px;
+	color: #B9C5CC;
+}
+.bouton-ajout-photo {
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+}
+.bouton-ajout-photo input[type="file"] {
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+} 
+.bouton-ajout-photo label {
+	display: flex;
 	justify-content: center;
+	align-items: center;
+	width: 173px;
+	height: 36px;
+	background-color: #CBD6DC;
+	color: #306685;
+	cursor: pointer;
+	border-radius:20px;
 }
-.ajoutPhoto form label{
-	padding:10px;
-}
-.ajoutPhoto form input, select{
-	border:none;
-	box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.171);;
-	height: 51px;
+.formulaire{
 	width: 420px;
+	height: 252px;
+	display:flex;
+	flex-direction:column;
+	margin-top:30px;
+	border-bottom:1px solid#B3B3B3;
+	margin-bottom:20px;
+}
+.formulaire label{
+	font-size:20px;
+	margin-top:20px;
+	margin-bottom:5px;
+	color:#3D3D3D;
+}
+.formulaire input{
+	width: 420px;
+	height: 51px;
+	border:none;
+	box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.116);
+	padding:5px;
+}
+#categorieSelect{
+	width: 420px;
+	height: 51px;
+	border:none;
+	box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.116);
+	padding:5px;
 }
 #valider{
-	cursor:pointer;
-	padding:10px;
-	width:237px ;
+	display:block;
+	width: 237px;
+	height: 36px;
 	border-radius:20px;
-	background: #A7A7A7;
-	color: white;
+	color:white;
+	background:#A7A7A7;
 	border:none;
-	margin-top:40px;
+	padding:5px;
 }
-#valider:hover{
-	transform:scale(1.05);
-}
+
+
+
 
 
 

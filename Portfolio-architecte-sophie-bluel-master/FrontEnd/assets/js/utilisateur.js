@@ -31,11 +31,14 @@ const btnAjout = document.getElementById('btnAjout');
 
 modifGalerie.addEventListener('click', function() {
   modale.style.display = "flex";
+  
 });
 
 closeButtons.forEach(function(button) {
   button.addEventListener('click', function(){
     modale.style.display = "none";
+    modalePrincipale.style.display ='flex';
+    modaleAjoutPhoto.style.display = "none";
   });
 });
 
@@ -49,3 +52,28 @@ btnAjout.addEventListener('click', function(){
   modalePrincipale.style.display='none';
 });
 
+// galerie miniatures 
+
+const miniaturesContainer = document.getElementById('miniaturesContainer');
+
+fetch('http://localhost:5678/api/works')
+  .then(response => response.json()) 
+  .then(data => {
+    data.forEach(image => {
+      const addElt = document.createElement("figure");
+      const imgElement = document.createElement('img');
+      const iconElt = document.createElement('i');
+      iconElt.classList.add('far', 'fa-trash-alt');
+
+      imgElement.src = image.imageUrl;
+      
+      miniaturesContainer.appendChild(addElt);
+      addElt.appendChild(imgElement);
+      addElt.appendChild(iconElt);
+    });
+  })
+  .catch(error => {
+    console.error('Une erreur s\'est produite lors de la récupération des images:', error);
+  });
+
+// ajout et suppression d'images 

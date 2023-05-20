@@ -15,6 +15,7 @@
     <script src="https://kit.fontawesome.com/a4e4faa4f9.js" crossorigin="anonymous"></script>
   </head>
   <body>
+
     <!-- bandeau connecté -->
     <div class="bandeauConnecte reset-margins" id="bandeau">
       <i class="far fa-edit"></i>
@@ -22,54 +23,71 @@
       <button class="changement" id="IDchange">publier les changements</button>
     </div>
     <!-- fin bandeau -->
+
     <!-- fenetre modale -->
-
     <div class="modal-container" id="contMiniat">
-
       <div class="modale">
-          <!-- modale galerie -->
+
+    <!-- modale galerie -->
         <div class="modaleGalerie">
           <button class="fermer" id="close">
             <i class="fas fa-times"></i>
           </button>
           <h3>Galerie photo</h3>
-          <div id="miniaturesContainer ">
-          </div>
+          <div id="miniaturesContainer">
+          </div>        
           <button type="button" id="btnAjout">Ajouter une photo</button>
           <a href="#" class="suppr">Supprimer la galerie</a>
         </div>
-          <!-- modale ajout photo -->
-          <div class="ajoutPhoto">
-            <div class="btnsIcon">
-              <button class="previous" id="previous">
-                <i class="fas fa-arrow-left"></i>
-              </button>
-              <button class="fermer2" id="close2">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-            <h3>Ajout photo</h3>
-            <div class="photoContainer">
-              <img src="" alt="">
-              <button class="ajout">+ Ajouter photo</button>
-              <p>jpg, png: 4mo max</p>
-            </div>
-            <form action="post">
-              <label for="text">Titre</label>
-              <input type="text">
-              <label for="categorie">Catégorie</label>
-              <select name="pets" id="pet-select">
-                <option value=""></option>
-                <option value="obj">Objets</option>
-                <option value="appa">Appartements</option>
-                <option value="H&R">Hôtel & restaurants</option>
-            </select>
-            </form>
-            <button id="valider">Valider</button>
+
+    <!-- modale ajout photo -->
+  <div class="ajoutPhoto">
+    <div class="btnsIcon">
+      <button class="previous" id="previous">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <button class="fermer2" id="close2">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+      <h3>Ajout photo</h3>
+
+    <form action="post" id="formulaireAjoutPhoto">
+
+      <div class="cadrePhoto">
+        <i class="far fa-image"></i>
+        <span class="bouton-ajout-photo">
+          <input type="file" id="ajouterPhoto" accept="image/*">
+          <label for="ajouterPhoto">+ Ajout photo</label>
+        </span>
+        <p>jpg, png: 4mo max</p>
+      </div>
+
+      <div class="formulaire">
+        <label for="text">Titre</label>
+        <input type="text" placeholder="Entrez un titre ici" id="titreInput">
+        <label for="categorie">Catégorie</label>
+        <select name="categories" id="categorieSelect">
+          <option value="">-- Choisissez une catégorie --</option>
+          <option value="obj">Objets</option>
+          <option value="appa">Appartements</option>
+          <option value="H&R">Hôtel & restaurants</option>
+        </select>
+        
+      </div>
+      <button id="valider">Valider</button>
+      
+
+      
+      
+  </form>
+
+  
           </div>
       </div>
-    </div>
+  </div>
     <!-- fin fenetre modale -->
+
     <header>
       <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
       <nav>
@@ -85,12 +103,14 @@
       <section id="introduction">
         <figure>
           <img src="./assets/images/sophie-bluel.png" alt="Sophie Bluel" />
+
           <!-- modifier photo profil -->
           <div class="modifier" id="modifProfil">
             <i class="far fa-edit"></i>
             <p>modifier</p> 
           </div>
           <!-- fin -->
+
         </figure>
 
 
@@ -117,20 +137,24 @@
         
         <div class="projets">
           <h2>Mes Projets</h2> 
+
           <!-- modifier projets -->
           <div class="modifier" id="modifGalerie" >
             <i class="far fa-edit"></i>
             <p>modifier</p> 
           </div>
         </div>
+
         <!-- catégories  -->
         <div class="categories" id="categ">
           <button class="actif" id="btnT">Tous</button>
         </div>
         <!-- fin catégories -->
+
         <!-- galerie -->
         <div class="gallery" id="IDgallery"></div>
         <!-- fin galerie -->
+
       </section>
       <section id="contact">
         <h2>Contact</h2>
