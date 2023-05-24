@@ -1,3 +1,12 @@
+/* variables */
+:root {
+	--background-color: #FFFEF8;
+	--color-primary: #B1663C;
+	--color-secondary: #1D6154;
+	--color-black: black;
+	--color-white: white;
+  }
+
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -109,7 +118,7 @@ section {
 
 body {
 	line-height: 1;
-	background-color: #FFFEF8;
+	background-color: var(--background-color);
 }
 
 ol,
@@ -160,7 +169,7 @@ h1 {
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: var(--color-primary);
 }
 
 h1>span {
@@ -174,7 +183,7 @@ h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: var(--color-secondary);
 }
 
 nav ul {
@@ -196,12 +205,12 @@ nav li img {
 }
 
 nav ul li a {
-	color: black;
+	color: var(--color-black);
 	text-decoration: none;
 }
 
 li a:hover {
-	color: #B1663C;
+	color: var(--color-primary);
 }
 
 #introduction {
@@ -233,7 +242,6 @@ li a:hover {
 
 #portfolio h2 {
 	text-align: center;
-	/* margin-bottom: 1em; */
 }
 
 /* partie choix catégories */
@@ -250,23 +258,23 @@ li a:hover {
 	margin: 10px;
 	padding: 10px 30px;
 	border-radius: 20px;
-	border: 1px solid #1D6154;
+	border: 1px solid var(--color-secondary);
 	font-size: 16px;
 	font-weight: bold;
 }
 .actif {
 	color: white;
-	background: #1D6154;
+	background: var(--color-secondary);
 }
 
 .inactif {
 	background: white;
-	color: #1D6154;
+	color: var(--color-secondary);
 }
 
 .categories button:hover {
 	color: white;
-	background: #1D6154;
+	background: var(--color-secondary);
 }
 
 .gallery {
@@ -324,7 +332,7 @@ input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: #1D6154;
+	background-color: var(--color-secondary);
 	margin: 2em auto;
 	width: 180px;
 	text-align: center;
@@ -336,7 +344,7 @@ button[type="button"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: #1D6154;
+	background-color: var(--color-secondary);
 	margin: 2em auto;
 	width: 180px;
 	padding: 10px;
@@ -402,7 +410,7 @@ footer nav ul {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: #1D6154;
+	background-color: var(--color-secondary);
 	margin: 2em auto;
 	width: 180px;
 	padding: 10px;
@@ -430,6 +438,10 @@ footer nav ul {
 	padding: 0;
   }
 .bandeauConnecte{
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
 	width: 100%;
 	padding: 5px;
 	margin:0;
@@ -490,10 +502,10 @@ footer nav ul {
 
 /* fenetre modale */
 .modal-container{
-	position:absolute;
+	position:fixed;
 	width: 100%;
-	height: 3550px;
-	top:0;
+	height: 100%;
+	top:45px;
 	bottom:0;
 	left:0;
 	right:0;
@@ -506,7 +518,7 @@ footer nav ul {
 .modale{
 	position:absolute;
 	border-radius:10px;
-	top:200px;
+	top:100px;
 	background: white;
 	width:630px ;
 	height: 731px;
@@ -520,7 +532,7 @@ footer nav ul {
 	width: 100%;
 	height: 100%;
 	opacity:1;
-	animation:.5s fadein ease-in;
+	animation:.1s fadein ease-in;
 }
 .modaleGalerie H3{
 	font-size: 26px;
@@ -613,14 +625,20 @@ footer nav ul {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	animation:.5s fadein ease-in;
+	/* animation:.3s fadein ease-in; */
+	animation:.1s alternate  fadein;
 	
 }
 @keyframes fadein {
 	from{
 		opacity:0;
+		transform: scale(0);
+
 	}to{
 		opacity:1;
+		transform: scale(1);
+
+
 	}
 	
 }
@@ -636,10 +654,31 @@ footer nav ul {
 	justify-content: center;
 	align-items: center;
 	background:#E8F1F6;
+	overflow:hidden;
+}
+.previewPhoto{
+	display:none;
+	justify-content: center;
+	align-items: center;
+}
+.previewPhoto img{
+	width: 129px;
+	height: 193px;
+	object-fit:cover;
+}
+.beforePreview{
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 .cadrePhoto i{
 	font-size:60px;
 	color: #B9C5CC;
+}
+#errorMsg{
+	color:red;
+	margin-top:8px;
 }
 .bouton-ajout-photo {
 	position: relative;
@@ -659,10 +698,12 @@ footer nav ul {
 	width: 173px;
 	height: 36px;
 	background-color: #CBD6DC;
-	color: #306685;
+	color: var(--color-secondary);
 	cursor: pointer;
 	border-radius:20px;
 }
+
+
 #formulaireAjoutPhoto{
 	width: 420px;
 	height: auto;
@@ -698,18 +739,18 @@ footer nav ul {
 	height: 60px;
 	border:none;
 	box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.116);
-	
 }
 #valider{
 	display:block;
 	width: 237px;
 	height: 36px;
 	border-radius:20px;
-	color:white;
+	color:var(--color-white);
 	background:#A7A7A7;
 	border:none;
 	padding:5px;
 }
+
 
 
 
