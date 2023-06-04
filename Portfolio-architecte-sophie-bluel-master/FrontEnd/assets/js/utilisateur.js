@@ -19,8 +19,6 @@ if (token) {
   });
 }
 
-// modale principale
-
 const modifGalerie = document.getElementById("modifGalerie");
 const modale = document.getElementById("contMiniat");
 const closeButtons = document.querySelectorAll("#close, #close2");
@@ -29,29 +27,28 @@ const modaleAjoutPhoto = document.getElementsByClassName('ajoutPhoto')[0];
 const modalePrincipale = document.getElementsByClassName('modaleGalerie')[0];
 const btnAjout = document.getElementById('btnAjout');
 
-modifGalerie.addEventListener('click', function() {
+modifGalerie.addEventListener('click', function () {
   modale.style.display = "flex";
   modaleAjoutPhoto.style.display = "none";
-  
 });
 
-closeButtons.forEach(function(button) {
-  button.addEventListener('click', function(){
+closeButtons.forEach(function (button) {
+  button.addEventListener('click', function () {
     modale.style.display = "none";
-    modalePrincipale.style.display ='flex';
-    modaleAjoutPhoto.style.display = "none"; 
+    modalePrincipale.style.display = 'flex';
+    modaleAjoutPhoto.style.display = "none";
     document.getElementById("imgContainer").innerHTML = "";
     document.getElementById("befImg").style.display = "flex";
-    document.getElementById('errorMsg').innerHTML = ""; 
+    document.getElementById('errorMsg').innerHTML = "";
     document.getElementById("valider").style.background = "#A7A7A7";
     document.getElementById("titreInput").value = "";
     document.getElementById("categorieSelect").value = "";
   });
 });
 
-btnPrevious.addEventListener('click', function(){
-  modaleAjoutPhoto.style.display ='none';
-  modalePrincipale.style.display='flex';
+btnPrevious.addEventListener('click', function () {
+  modaleAjoutPhoto.style.display = 'none';
+  modalePrincipale.style.display = 'flex';
   document.getElementById("imgContainer").innerHTML = "";
   document.getElementById("befImg").style.display = "flex";
   document.getElementById('errorMsg').innerHTML = "";
@@ -60,53 +57,23 @@ btnPrevious.addEventListener('click', function(){
   document.getElementById("categorieSelect").value = "";
 });
 
-btnAjout.addEventListener('click', function(){
-  modaleAjoutPhoto.style.display ='flex';
-  modalePrincipale.style.display='none';
+btnAjout.addEventListener('click', function () {
+  modaleAjoutPhoto.style.display = 'flex';
+  modalePrincipale.style.display = 'none';
 });
-
-// galerie miniatures 
-
-const miniaturesContainer = document.getElementById('miniaturesContainer');
-
-fetch('http://localhost:5678/api/works')
-  .then(response => response.json()) 
-  .then(data => {
-    data.forEach(image => {
-      const addElt = document.createElement("figure");
-      const imgElement = document.createElement('img');
-      const iconElt = document.createElement('i');
-      iconElt.classList.add('far', 'fa-trash-alt');
-
-      imgElement.src = image.imageUrl;
-      
-      miniaturesContainer.appendChild(addElt);
-      addElt.appendChild(imgElement);
-      addElt.appendChild(iconElt);
-    });
-  })
-  .catch(error => {
-    console.error('Une erreur s\'est produite lors de la récupération des images:', error);
-  });
-
-// ajout et suppression d'images 
-// ajout 
 
 function afficherImage(input) {
   const file = input.files[0];
-
-  // Vérifier si un fichier est sélectionné
   if (file) {
-    // Vérifier le type de fichier
     if (file.type.startsWith("image/")) {
-      // Vérifier la taille du fichier (4Mo maximum)
       if (file.size <= 4 * 1024 * 1024) {
         const reader = new FileReader();
 
         reader.onload = function (e) {
           const imageElement = document.createElement("img");
           imageElement.setAttribute("src", e.target.result);
-          imageElement.setAttribute("alt", "Image sélectionnée");
+          imageElement.setAttribute("alt", file.name);
+
           document.getElementById("imgContainer").appendChild(imageElement);
         };
 
@@ -119,12 +86,57 @@ function afficherImage(input) {
     }
   }
 }
-// fonction écriture, inscription de l'image dans la bdd
-function enregistrerImg(){
 
-  console.log('ok');
+async function addWorks() {
+  const url = 'http://localhost:5678/api/works';
+  const titre = document.getElementById("titreInput").value;
+  const categorie = document.getElementById("categorieSelect").value;
+  const fichierImage = document.getElementById("ajouterPhoto").files[0];
+
+  console.log(titre, categorie, fichierImage)
+
+  const formData = new FormData();
+  formData.append("title", titre);
+  formData.append("image", fichierImage);
+  formData.append("category", parseInt(categorie));
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    });
+
+    if (response.ok) {
+      console.log('Données envoyées avec succès !');     
+      modalePrincipale.style.display = 'flex';
+      modaleAjoutPhoto.style.display = "none";
+      createMiniature([{
+        imageUrl: response.imageUrl
+        
+      }]);
+      home();
+      document.getElementById("imgContainer").innerHTML = "";
+      document.getElementById("befImg").style.display = "flex";
+      document.getElementById('errorMsg').innerHTML = "";
+      document.getElementById("valider").style.background = "#A7A7A7";
+      document.getElementById("titreInput").value = "";
+      document.getElementById("categorieSelect").value = "";
+    } else {
+      console.error('Une erreur s\'est produite lors de l\'envoi des données.');
+    }
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la requête :', error);
+  }
 }
-// Fonction pour vérifier si tous les champs sont remplis
+
+
+
+const validerBtn = document.getElementById("valider");
+validerBtn.addEventListener('click', addWorks);
+
 function verifierChamps() {
   const titre = document.getElementById("titreInput").value;
   const categorie = document.getElementById("categorieSelect").value;
@@ -132,36 +144,109 @@ function verifierChamps() {
   const errorMsg = document.getElementById('errorMsg');
   const validerBtn = document.getElementById("valider");
 
-  
-
   if (titre !== "" && categorie !== "" && fichierImage) {
     validerBtn.style.background = "#1D6154";
     errorMsg.innerHTML = "";
     const imgContainer = document.getElementById('imgContainer');
     const img = imgContainer.querySelector("img");
     img.alt = titre;
-    
-    validerBtn.addEventListener('click', enregistrerImg);
-    
+
+    validerBtn.removeEventListener('click', addWorks);
+    validerBtn.addEventListener('click', addWorks);
   } else {
     validerBtn.style.background = "#A7A7A7";
     errorMsg.innerHTML = "Veuillez remplir tous les champs et sélectionner une image.";
+    validerBtn.removeEventListener('click', addWorks);
   }
 }
 
-// Écouteur d'événement pour le changement de fichier dans l'input de type file
 document.getElementById("ajouterPhoto").addEventListener("change", function () {
   const input = this;
   document.getElementById("imgContainer").style.display = "flex";
   document.getElementById("befImg").style.display = "none";
   afficherImage(input);
-  verifierChamps(); // Vérifier les champs après le changement de fichier
+  verifierChamps();
 });
 
-// Écouteur d'événement pour le changement dans le champ image
 document.getElementById("ajouterPhoto").addEventListener("input", verifierChamps);
-// Écouteur d'événement pour le changement dans le champ titre
 document.getElementById("titreInput").addEventListener("input", verifierChamps);
-// Écouteur d'événement pour le changement dans le champ catégorie
 document.getElementById("categorieSelect").addEventListener("change", verifierChamps);
+
+// suppression de photos
+const containerSuppr = document.getElementById('miniaturesContainer');
+
+function supprWorks(event) {
+  // Récupérer l'élément <figure> parent du bouton cliqué
+  const figureElement = event.target.closest('figure');
+
+  // Effectuer une requête GET à l'API pour récupérer les informations des images
+  fetch('http://localhost:5678/api/works', {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Une erreur s\'est produite lors de la récupération des informations des images.');
+    }
+  })
+  .then(data => {
+    // Récupérer l'index de l'élément <figure> correspondant dans le tableau des images
+    const index = Array.from(figureElement.parentNode.children).indexOf(figureElement);
+
+    // Vérifier si l'index est valide
+    if (index >= 0 && index < data.length) {
+      // Récupérer l'ID de l'image à supprimer à partir des informations obtenues de l'API
+      const imageId = data[index].id;
+
+      // Effectuer une requête DELETE à l'API pour supprimer l'image
+      fetch('http://localhost:5678/api/works/' + imageId, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+      })
+      .then(response => {
+        if (response.ok) {
+          // Supprimer l'élément <figure> correspondant à l'image
+          figureElement.remove();
+        } else {
+          throw new Error('Une erreur s\'est produite lors de la suppression de l\'image.');
+        }
+      })
+      .catch(error => {
+        console.error('Une erreur s\'est produite lors de la suppression de l\'image:', error);
+      });
+    } else {
+      throw new Error('Index invalide pour l\'élément <figure>.');
+    }
+  })
+  .catch(error => {
+    console.error('Une erreur s\'est produite lors de la récupération des informations des images:', error);
+  });
+}
+
+
+
+
+
+containerSuppr.addEventListener('click', supprWorks);
+
+
+
+
+
+
+
+  // Les valeurs des input + l'image
+  // FormData
+  // Fetch avec l'url d'ajout de works (POST - multipart/form-data)
+  //Fermer la modal
+  //Relancer les fonctions qui gere l'afficahge des works (home())
+
+
+
 
