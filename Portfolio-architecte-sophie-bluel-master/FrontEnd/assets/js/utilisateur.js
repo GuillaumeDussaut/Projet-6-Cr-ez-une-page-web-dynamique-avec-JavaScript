@@ -1,65 +1,65 @@
-const token = localStorage.getItem('token');
-const bandeauConnecte = document.getElementById('bandeau');
-const divModifier = document.querySelectorAll('.modifier');
-const btns = document.getElementById('categ');
+const token = localStorage.getItem("token");
+const bandeauConnecte = document.getElementById("bandeau");
+const divModifier = document.querySelectorAll(".modifier");
+const btns = document.getElementById("categ");
 
 if (token) {
   // Utilisateur connecté
-  bandeauConnecte.classList.remove('deconnecte');
-  btns.classList.add('deconnecte');
-  divModifier.forEach((div) => {
-    div.classList.remove('deconnecte');
+  bandeauConnecte.classList.remove("deconnecte");
+  btns.classList.add("deconnecte");
+  divModifier.forEach((btns) => {
+    btns.classList.remove("deconnecte");
   });
 } else {
   // Utilisateur déconnecté
-  bandeauConnecte.classList.add('deconnecte');
+  bandeauConnecte.classList.add("deconnecte");
   divModifier.forEach((div) => {
-    div.classList.add('deconnecte');
-    div.classList.remove('modifier');
+    div.classList.add("deconnecte");
+    div.classList.remove("modifier");
   });
 }
 
 const modifGalerie = document.getElementById("modifGalerie");
 const modale = document.getElementById("contMiniat");
 const closeButtons = document.querySelectorAll("#close, #close2");
-const btnPrevious = document.getElementById('previous');
-const modaleAjoutPhoto = document.getElementsByClassName('ajoutPhoto')[0];
-const modalePrincipale = document.getElementsByClassName('modaleGalerie')[0];
-const btnAjout = document.getElementById('btnAjout');
+const btnPrevious = document.getElementById("previous");
+const modaleAjoutPhoto = document.getElementsByClassName("ajoutPhoto")[0];
+const modalePrincipale = document.getElementsByClassName("modaleGalerie")[0];
+const btnAjout = document.getElementById("btnAjout");
 
-modifGalerie.addEventListener('click', function () {
+modifGalerie.addEventListener("click", function () {
   modale.style.display = "flex";
   modaleAjoutPhoto.style.display = "none";
 });
 
 closeButtons.forEach(function (button) {
-  button.addEventListener('click', function () {
+  button.addEventListener("click", function () {
     modale.style.display = "none";
-    modalePrincipale.style.display = 'flex';
+    modalePrincipale.style.display = "flex";
     modaleAjoutPhoto.style.display = "none";
     document.getElementById("imgContainer").innerHTML = "";
     document.getElementById("befImg").style.display = "flex";
-    document.getElementById('errorMsg').innerHTML = "";
+    document.getElementById("errorMsg").innerHTML = "";
     document.getElementById("valider").style.background = "#A7A7A7";
     document.getElementById("titreInput").value = "";
     document.getElementById("categorieSelect").value = "";
   });
 });
 
-btnPrevious.addEventListener('click', function () {
-  modaleAjoutPhoto.style.display = 'none';
-  modalePrincipale.style.display = 'flex';
+btnPrevious.addEventListener("click", function () {
+  modaleAjoutPhoto.style.display = "none";
+  modalePrincipale.style.display = "flex";
   document.getElementById("imgContainer").innerHTML = "";
   document.getElementById("befImg").style.display = "flex";
-  document.getElementById('errorMsg').innerHTML = "";
+  document.getElementById("errorMsg").innerHTML = "";
   document.getElementById("valider").style.background = "#A7A7A7";
   document.getElementById("titreInput").value = "";
   document.getElementById("categorieSelect").value = "";
 });
 
-btnAjout.addEventListener('click', function () {
-  modaleAjoutPhoto.style.display = 'flex';
-  modalePrincipale.style.display = 'none';
+btnAjout.addEventListener("click", function () {
+  modaleAjoutPhoto.style.display = "flex";
+  modalePrincipale.style.display = "none";
 });
 
 function afficherImage(input) {
@@ -70,11 +70,11 @@ function afficherImage(input) {
         const reader = new FileReader();
 
         reader.onload = function (e) {
-          const imageElement = document.createElement("img");
-          imageElement.setAttribute("src", e.target.result);
-          imageElement.setAttribute("alt", file.name);
+          const imgElement = document.createElement("img");
+          imgElement.setAttribute("src", e.target.result);
+          imgElement.setAttribute("alt", file.name);
 
-          document.getElementById("imgContainer").appendChild(imageElement);
+          document.getElementById("imgContainer").appendChild(imgElement);
         };
 
         reader.readAsDataURL(file);
@@ -88,12 +88,12 @@ function afficherImage(input) {
 }
 
 async function addWorks() {
-  const url = 'http://localhost:5678/api/works';
+  const url = "http://localhost:5678/api/works";
   const titre = document.getElementById("titreInput").value;
   const categorie = document.getElementById("categorieSelect").value;
   const fichierImage = document.getElementById("ajouterPhoto").files[0];
 
-  console.log(titre, categorie, fichierImage)
+  console.log(titre, categorie, fichierImage);
 
   const formData = new FormData();
   formData.append("title", titre);
@@ -102,61 +102,56 @@ async function addWorks() {
 
   try {
     const response = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Authorization': `Bearer ${token}`
+        "Authorization": `Bearer ${token}`
       },
       body: formData
     });
 
     if (response.ok) {
-      console.log('Données envoyées avec succès !');     
-      modalePrincipale.style.display = 'flex';
+      console.log("Données envoyées avec succès !");
+      modalePrincipale.style.display = "flex";
       modaleAjoutPhoto.style.display = "none";
       createMiniature([{
         imageUrl: response.imageUrl
-        
       }]);
-      home();
       document.getElementById("imgContainer").innerHTML = "";
       document.getElementById("befImg").style.display = "flex";
-      document.getElementById('errorMsg').innerHTML = "";
+      document.getElementById("errorMsg").innerHTML = "";
       document.getElementById("valider").style.background = "#A7A7A7";
       document.getElementById("titreInput").value = "";
       document.getElementById("categorieSelect").value = "";
+      home();
     } else {
-      console.error('Une erreur s\'est produite lors de l\'envoi des données.');
+      console.error("Une erreur s'est produite lors de l'envoi des données.");
     }
   } catch (error) {
-    console.error('Une erreur s\'est produite lors de la requête :', error);
+    console.error("Une erreur s'est produite lors de la requête :", error);
   }
 }
-
-
-
 const validerBtn = document.getElementById("valider");
-validerBtn.addEventListener('click', addWorks);
+validerBtn.addEventListener("click", addWorks);
 
 function verifierChamps() {
   const titre = document.getElementById("titreInput").value;
   const categorie = document.getElementById("categorieSelect").value;
   const fichierImage = document.getElementById("ajouterPhoto").files[0];
-  const errorMsg = document.getElementById('errorMsg');
-  const validerBtn = document.getElementById("valider");
+  const errorMsg = document.getElementById("errorMsg");
 
   if (titre !== "" && categorie !== "" && fichierImage) {
     validerBtn.style.background = "#1D6154";
     errorMsg.innerHTML = "";
-    const imgContainer = document.getElementById('imgContainer');
+    const imgContainer = document.getElementById("imgContainer");
     const img = imgContainer.querySelector("img");
     img.alt = titre;
 
-    validerBtn.removeEventListener('click', addWorks);
-    validerBtn.addEventListener('click', addWorks);
+    validerBtn.removeEventListener("click", addWorks);
+    validerBtn.addEventListener("click", addWorks);
   } else {
     validerBtn.style.background = "#A7A7A7";
     errorMsg.innerHTML = "Veuillez remplir tous les champs et sélectionner une image.";
-    validerBtn.removeEventListener('click', addWorks);
+    validerBtn.removeEventListener("click", addWorks);
   }
 }
 
@@ -173,24 +168,23 @@ document.getElementById("titreInput").addEventListener("input", verifierChamps);
 document.getElementById("categorieSelect").addEventListener("change", verifierChamps);
 
 // suppression de photos
-const containerSuppr = document.getElementById('miniaturesContainer');
-
+const containerSuppr = document.getElementById("miniaturesContainer");
 function supprWorks(event) {
   // Récupérer l'élément <figure> parent du bouton cliqué
-  const figureElement = event.target.closest('figure');
+  const figureElement = event.target.closest("figure");
 
   // Effectuer une requête GET à l'API pour récupérer les informations des images
-  fetch('http://localhost:5678/api/works', {
-    method: 'GET',
+  fetch("http://localhost:5678/api/works", {
+    method: "GET",
     headers: {
-      'Authorization': `Bearer ${token}`
+      "Authorization": `Bearer ${token}`
     },
   })
   .then(response => {
     if (response.ok) {
       return response.json();
     } else {
-      throw new Error('Une erreur s\'est produite lors de la récupération des informations des images.');
+      throw new Error("Une erreur s'est produite lors de la récupération des informations des images.");
     }
   })
   .then(data => {
@@ -201,52 +195,34 @@ function supprWorks(event) {
     if (index >= 0 && index < data.length) {
       // Récupérer l'ID de l'image à supprimer à partir des informations obtenues de l'API
       const imageId = data[index].id;
-
       // Effectuer une requête DELETE à l'API pour supprimer l'image
-      fetch('http://localhost:5678/api/works/' + imageId, {
-        method: 'DELETE',
+      fetch("http://localhost:5678/api/works/" + imageId, {
+        method: "DELETE",
         headers: {
-          'Authorization': `Bearer ${token}`
+          "Authorization": `Bearer ${token}`
         },
       })
       .then(response => {
         if (response.ok) {
           // Supprimer l'élément <figure> correspondant à l'image
           figureElement.remove();
+          home();
         } else {
-          throw new Error('Une erreur s\'est produite lors de la suppression de l\'image.');
+          throw new Error("Une erreur s'est produite lors de la suppression de l'image.");
         }
       })
       .catch(error => {
-        console.error('Une erreur s\'est produite lors de la suppression de l\'image:', error);
+        console.error("Une erreur s'est produite lors de la suppression de l'image:", error);
       });
     } else {
-      throw new Error('Index invalide pour l\'élément <figure>.');
+      throw new Error("Index invalide pour l'élément <figure>.");
     }
   })
   .catch(error => {
-    console.error('Une erreur s\'est produite lors de la récupération des informations des images:', error);
+    console.error("Une erreur s'est produite lors de la récupération des informations des images:", error);
   });
 }
 
-
-
-
-
-containerSuppr.addEventListener('click', supprWorks);
-
-
-
-
-
-
-
-  // Les valeurs des input + l'image
-  // FormData
-  // Fetch avec l'url d'ajout de works (POST - multipart/form-data)
-  //Fermer la modal
-  //Relancer les fonctions qui gere l'afficahge des works (home())
-
-
+containerSuppr.addEventListener("click", supprWorks);
 
 
