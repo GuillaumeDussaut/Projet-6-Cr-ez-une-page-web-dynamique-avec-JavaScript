@@ -106,6 +106,7 @@ function createMiniature(works) {
       addElt.appendChild(iconElt);
     }
 }
+
 let categoriesCharged = false;
 async function home() {
     const works = await getWorks();

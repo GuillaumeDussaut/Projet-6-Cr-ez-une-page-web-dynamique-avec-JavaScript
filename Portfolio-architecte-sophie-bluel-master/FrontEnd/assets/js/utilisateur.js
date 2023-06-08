@@ -113,9 +113,9 @@ async function addWorks() {
       console.log("Données envoyées avec succès !");
       modalePrincipale.style.display = "flex";
       modaleAjoutPhoto.style.display = "none";
-      createMiniature([{
-        imageUrl: response.imageUrl
-      }]);
+      // createMiniature([{
+      //   imageUrl: response.imageUrl
+      // }]);
       document.getElementById("imgContainer").innerHTML = "";
       document.getElementById("befImg").style.display = "flex";
       document.getElementById("errorMsg").innerHTML = "";
