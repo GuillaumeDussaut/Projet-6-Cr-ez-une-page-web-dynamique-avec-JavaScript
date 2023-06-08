@@ -123,7 +123,6 @@ async function home() {
 // catégories dans le formulaire
 function fetchCategories(categories) {
     const selectElement = document.getElementById("categorieSelect");
-    selectElement.innerHTML = '';
     for (const category of categories) {
       const optionElement = document.createElement("option");
       optionElement.value = category.id;
