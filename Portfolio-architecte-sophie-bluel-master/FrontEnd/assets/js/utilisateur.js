@@ -111,6 +111,7 @@ async function addWorks() {
 
     if (response.ok) {
       console.log("Données envoyées avec succès !");
+      modale.style.display = "none";
       modalePrincipale.style.display = "flex";
       modaleAjoutPhoto.style.display = "none";
       // createMiniature([{
