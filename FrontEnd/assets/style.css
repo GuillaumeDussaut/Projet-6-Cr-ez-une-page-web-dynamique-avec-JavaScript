@@ -176,7 +176,6 @@ h1>span {
 	font-family: 'Work Sans';
 	font-size: 10px;
 	letter-spacing: 0.1em;
-	;
 }
 
 h2 {
@@ -190,12 +189,13 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+	width: 100%;
 }
 
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	width: 25%;
 }
 
 nav li img {
@@ -206,9 +206,16 @@ nav li img {
 
 nav ul li a {
 	color: var(--color-black);
+	padding:10px;
 	text-decoration: none;
 }
+#login{
+	display:flex;
 
+}
+#logout{
+	display:flex;
+}
 li a:hover {
 	color: var(--color-primary);
 }

@@ -2,6 +2,8 @@ const token = localStorage.getItem("token");
 const bandeauConnecte = document.getElementById("bandeau");
 const divModifier = document.querySelectorAll(".modifier");
 const btns = document.getElementById("categ");
+const login = document.getElementById("login");
+const logout = document.getElementById("logout");
 
 if (token) {
   // Utilisateur connecté
@@ -9,6 +11,8 @@ if (token) {
   btns.classList.add("deconnecte");
   divModifier.forEach((btns) => {
     btns.classList.remove("deconnecte");
+  login.style.display = "none";
+  logout.style.display = "flex"
   });
 } else {
   // Utilisateur déconnecté
@@ -17,8 +21,15 @@ if (token) {
     div.classList.add("deconnecte");
     div.classList.remove("modifier");
   });
+  login.style.display = "flex";
+  logout.style.display = "none"
+  
 }
-
+function logOut(){
+  localStorage.removeItem("token");
+  location.reload();
+}
+logout.addEventListener('click', logOut);
 const modifGalerie = document.getElementById("modifGalerie");
 const modale = document.getElementById("contMiniat");
 const closeButtons = document.querySelectorAll("#close, #close2");
@@ -114,9 +125,7 @@ async function addWorks() {
       modale.style.display = "none";
       modalePrincipale.style.display = "flex";
       modaleAjoutPhoto.style.display = "none";
-      // createMiniature([{
-      //   imageUrl: response.imageUrl
-      // }]);
+
       document.getElementById("imgContainer").innerHTML = "";
       document.getElementById("befImg").style.display = "flex";
       document.getElementById("errorMsg").innerHTML = "";
