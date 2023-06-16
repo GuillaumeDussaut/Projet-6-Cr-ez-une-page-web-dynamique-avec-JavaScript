@@ -429,7 +429,6 @@ footer nav ul {
 	padding: 0;
   }
 .bandeauConnecte{
-	z-index: 1;
 	position:fixed;
 	top:0;
 	left:0;
@@ -510,9 +509,10 @@ footer nav ul {
 .modale{
 	position:relative;
 	border-radius:10px;
-	padding:10px;
+	padding:20px;
 	background: white;
-	max-width:600px;
+	Width:600px;
+	Height:700px;
 }
 /* modale galerie */
 .modaleGalerie{
@@ -526,11 +526,12 @@ footer nav ul {
 	animation:.1s fadein ease-in;
 }
 .modaleGalerie H3{
+	padding:20px 50px;
 	font-size: 26px;
 	font-weight: bolder;
 }
 #miniaturesContainer{
-	width: 70%;
+	width: 80%;
 	padding:10px;
 	height: auto;
 	padding:20px;
@@ -615,7 +616,6 @@ footer nav ul {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* animation:.3s fadein ease-in; */
 	animation:.1s alternate  fadein;
 	
 }
